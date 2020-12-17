@@ -1,9 +1,15 @@
+.container-cards {
+    max-width: 1200px;
+    height: calc(100vh - 62px);
+    margin: auto;
+}
+
 .cards {
     width: 100%;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
 

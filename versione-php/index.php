@@ -9,11 +9,27 @@
     </head>
     <body>
         <header>
-            <div class="logo">
-                <img src="../dist/images/logo.svg" alt="">
+            <div class="container">
+                <div class="logo">
+                    <img src="../dist/images/logo.svg" alt="">
+                </div>
+
+                <div class="nav-menu">
+                    <ul>
+                        <li>
+                            <a href="#">Premium</a>
+                        </li>
+                        <li>
+                            <a href="#">Assistenza</a>
+                        </li>
+                        <li>
+                            <a href="#">Scarica</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </header>
-        <div class="container">
+        <div class="container-cards">
             <div class="cards">
 
                 <?php foreach ($dischi as $disco) { ?>
