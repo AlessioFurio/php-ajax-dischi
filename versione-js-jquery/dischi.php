@@ -73,7 +73,36 @@ $dischi = [
     ]
 ];
 
-header('Content-Type: application/json');
+$genres = [];
+foreach ($dischi as $disco) {
 
-echo json_encode($dischi);
+    $genre = $disco['genre'];
+    if(!in_array($genre, $genres)){
+        $genres[] = $genre;
+    }
+}
+
+
+
+if(!empty($_GET) && !empty($_GET['genre'])) {
+    // recupero il parametro GET "genre"
+    $genre = $_GET['genre'];
+
+    $dischi_filtrati = [];
+
+    foreach ($dischi as $disco) {
+        if($disco['genre'] == $genre) {
+            $dischi_filtrati[] = $disco;
+        }
+
+    }
+} else {
+
+    $dischi_filtrati = $dischi;
+}
+
+header('Content-Type: application/json');
+echo json_encode($dischi_filtrati);
+
+
 ?>

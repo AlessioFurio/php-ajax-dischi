@@ -93,7 +93,68 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+$(document).ready(function () {
+  var source = $("#entry-template").html();
+  var template = Handlebars.compile(source);
+  $.ajax({
+    url: 'dischi.php',
+    method: 'GET',
+    success: function success(data) {
+      var arrayGenre = [];
 
+      for (var i = 0; i < data.length; i++) {
+        var context = {
+          poster: data[i].poster,
+          title: data[i].title,
+          author: data[i].author,
+          year: data[i].year
+        };
+        var html = template(context);
+        $('.cards').append(html);
+
+        if (!arrayGenre.includes(data[i].genre)) {
+          arrayGenre.push(data[i].genre);
+        }
+      }
+
+      for (var i = 0; i < arrayGenre.length; i++) {
+        $('#select').append("<option value=\"".concat(arrayGenre[i], "\">\n                    ").concat(arrayGenre[i], "\n                    </option>"));
+      }
+    },
+    error: function error() {
+      console.log('errore');
+    }
+  });
+  $('#select').change(function () {
+    // intercetto cambio value nella select
+    $('.cards').empty(); // svuoto contenitore
+
+    var selectedGenre = $(this).val(); //recupero genere
+
+    $.ajax({
+      url: 'dischi.php',
+      method: 'GET',
+      data: {
+        genre: selectedGenre
+      },
+      success: function success(data) {
+        for (var i = 0; i < data.length; i++) {
+          var context = {
+            poster: data[i].poster,
+            title: data[i].title,
+            author: data[i].author,
+            year: data[i].year
+          };
+          var html = template(context);
+          $('.cards').append(html);
+        }
+      },
+      error: function error() {
+        console.log('errore');
+      }
+    });
+  });
+});
 
 /***/ }),
 
